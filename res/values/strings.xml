@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DefinePlug</string>
+    <string name="default_url">http://www.abbreviations.com/services/v1/defs.aspx?tokenid=tk1678&amp;word=satellite</string>
+    <string name="request">Define!</string>
+    <string name="url_string">Enter the word you want to search</string>
+</resources>

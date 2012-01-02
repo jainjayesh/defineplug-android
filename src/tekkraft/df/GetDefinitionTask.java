@@ -1,6 +1,8 @@
 package tekkraft.df;
 
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -31,16 +33,22 @@ public class GetDefinitionTask extends AsyncTask<Object, Void, String> {
 	protected String doInBackground(Object... arg0) {
 		mContext = (HttpclientActivity)arg0[0];
 		term = (String)arg0[1];
-    	url = query_url + term;
-        HttpClient client = new DefaultHttpClient();
-        HttpGet request = new HttpGet(url);
-        try{
-            HttpResponse response = client.execute(request);
-            String result = HttpHelper.request(response);
-            return result;
-        } catch (Exception ex) {
-        	return "Failed!" + ex.toString();
-        }
+		String query;
+		try {
+			query = URLEncoder.encode(term, "utf-8");
+		} catch (UnsupportedEncodingException e) {
+			return "Failed!" + e.toString();
+		}
+		url = query_url + query;
+		HttpClient client = new DefaultHttpClient();
+		HttpGet request = new HttpGet(url);
+		try{
+			HttpResponse response = client.execute(request);
+			String result = HttpHelper.request(response);
+			return result;
+		} catch (Exception ex) {
+			return "Failed!" + ex.toString();
+		}
 	}
 
 	@Override
